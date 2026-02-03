@@ -1,0 +1,124 @@
+/* ================================
+   Tailwind Base
+================================ */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+/* ================================
+   CSS Variables (KEEP COLORS SAME)
+================================ */
+:root {
+  --bg-main: #ffffff;          /* main background */
+  --bg-section: #f8f9fb;       /* light section bg */
+  --text-primary: #0f172a;     /* headings */
+  --text-secondary: #475569;   /* body text */
+  --brand-primary: #2563eb;    /* CTA / buttons */
+}
+
+/* ================================
+   Global Reset / Base Styling
+================================ */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-main);
+  color: var(--text-secondary);
+  font-family: ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
+    "Apple Color Emoji", "Segoe UI Emoji";
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ================================
+   Headings (Modern, Clean)
+================================ */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-primary);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* ================================
+   Sections Spacing (Modern UI)
+================================ */
+.section {
+  padding: 4rem 1rem;
+}
+
+@media (min-width: 768px) {
+  .section {
+    padding: 6rem 2rem;
+  }
+}
+
+/* ================================
+   Alternate Background Sections
+================================ */
+.section-muted {
+  background-color: var(--bg-section);
+}
+
+/* ================================
+   Buttons (CTA – Conversion Focused)
+================================ */
+.btn-primary {
+  @apply inline-flex items-center justify-center
+    rounded-lg px-6 py-3 text-sm font-semibold
+    text-white transition-all duration-200;
+  background-color: var(--brand-primary);
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+/* ================================
+   Navbar (Lightweight & Sticky)
+================================ */
+.navbar {
+  @apply sticky top-0 z-50 w-full border-b;
+  background-color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+}
+
+/* ================================
+   Container (Consistent Width)
+================================ */
+.container-custom {
+  @apply mx-auto max-w-7xl px-4;
+}
+
+/* ================================
+   Images (Performance Optimized)
+================================ */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ================================
+   Animations (Subtle, Modern)
+================================ */
+.fade-up {
+  animation: fadeUp 0.6s ease-out both;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
