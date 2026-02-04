@@ -14,6 +14,8 @@ import {
   CreditCard,
 } from "lucide-react";
 import { cn } from "../../lib/utils";
+import favLogo from "../assets/fav.webp";
+
 
 type FooterProps = {
   className?: string;
@@ -34,7 +36,8 @@ type FooterProps = {
 export function SiteFooter({
   className,
   brandName = "The Signals Bank",
-  logoSrc = "/src/assets/main-logo.webp",
+  logoSrc = favLogo,
+
   contactEmail = "support@thesignalsbank.com",
   social = {
     facebook: "#",
@@ -137,7 +140,7 @@ export function SiteFooter({
                   <div className="absolute -inset-[1px] rounded-full bg-gradient-to-br from-cyan-400/30 via-violet-500/20 to-emerald-400/25" />
                   <div className="relative h-16 w-16 overflow-hidden rounded-full bg-white/5 ring-1 ring-white/10">
                     <img
-                      src={logoSrc}
+                      src={(logoSrc as any)?.src ?? (logoSrc as any)}
                       alt={brandName}
                       className="h-full w-full object-cover"
                       draggable={false}

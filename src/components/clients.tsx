@@ -35,7 +35,7 @@ const DEMO_ITEMS: FocusRailItem[] = [
 
 export default function DemoOne() {
   return (
-    <main className="min-h-screen overflow-x-hidden w-full bg-neutral-950 flex flex-col items-center justify-center py-20 mt-10">
+    <main className="min-h-screen overflow-x-hidden w-full bg-[#070A1A] flex flex-col items-center justify-center py-20 mt-10">
       <div className="mb-12 text-center">
         <h1 className="text-4xl font-bold text-white mb-2">Results from our amazing members</h1>
         

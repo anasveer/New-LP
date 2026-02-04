@@ -4,6 +4,16 @@ import React, { useMemo } from "react";
 import { motion } from "framer-motion";
 import { TestimonialsColumnTSB } from "./ui/testimonial-column";
 
+// ✅ import logos (recommended)
+import log1 from "../assets/log1.webp";
+import log2 from "../assets/log2.png";
+import log3 from "../assets/log3.png";
+import log4 from "../assets/log4.png";
+import log5 from "../assets/log5.png";
+import log6 from "../assets/log6.png";
+import log7 from "../assets/log7.webp";
+import log8 from "../assets/log8.webp";
+
 type Logo = { src: string; alt: string };
 
 type TsbTestimonial = {
@@ -16,93 +26,86 @@ type TsbTestimonial = {
 };
 
 export default function SocialProofTestimonials() {
+  // ✅ one link for all testimonial cards
+  const CTA_LINK = "https://www.trustpilot.com/review/thesignalsbank.com";
+
   const logos: Logo[] = useMemo(
     () => [
-      { src: "/src/assets/log1.webp", alt: "GeekWire" },
-      { src: "/src/assets/log2.png", alt: "USA Today" },
-      { src: "/src/assets/log3.png", alt: "TechBullion" },
-      { src: "/src/assets/log4.png", alt: "US Insider" },
-      { src: "/src/assets/log5.png", alt: "HuffPost" },
-      { src: "/src/assets/log6.png", alt: "Business Insider" },
-      { src: "/src/assets/log7.webp", alt: "MarketWatch" },
-      { src: "/src/assets/log8.webp", alt: "TheStreet" },
+      { src: log1, alt: "GeekWire" },
+      { src: log2, alt: "USA Today" },
+      { src: log3, alt: "TechBullion" },
+      { src: log4, alt: "US Insider" },
+      { src: log5, alt: "HuffPost" },
+      { src: log6, alt: "Business Insider" },
+      { src: log7, alt: "MarketWatch" },
+      { src: log8, alt: "TheStreet" },
     ],
     [],
   );
 
-  // ✅ SAME content as your old SocialProofSection (replace if client demands exact copy)
   const testimonials: TsbTestimonial[] = useMemo(
     () => [
       {
-        title: "Hat mich echt überzeugt!",
-        text: "Ich wusste zuerst nicht ob ich es funktionieren würde, aber ich habe mich entschieden es auszuprobieren. Beste Entscheidung!",
-        name: "J. Weber",
-        date: "Mar 10, 2025",
+        title: "Every trade feels secured",
+        text: "I was often unsure whether a setup really made sense. Here, I finally have the feeling that everything is checked, analyzed, and double-secured. It completely changes your mindset.",
+        name: "Finn Mayer",
+        date: "January, 2016",
         stars: 5,
         verified: true,
       },
       {
-        title: "Absolut Genial!",
-        text: "Mein Konto wächst stetig, und der Support ist schnell. Klare Empfehlungen – mein Gefühl ist richtig gut aufgehoben.",
-        name: "S. Keller",
-        date: "Mar 9, 2025",
+        title: "I’m honestly still impressed",
+        text: "I’m honestly still impressed.\nTrading gold with Ionut is actually fun.\nEverything he does is structured and the trading is disciplined.\nNo gambling at any time.",
+        name: "Carmen Steck",
+        date: "January 2, 2026",
         stars: 5,
         verified: true,
       },
       {
-        title: "Absolut empfehlenswert!",
-        text: "Ich habe selten einen Service gesehen, der so zuverlässig funktioniert. Performance verbessert, klare Antworten.",
-        name: "Tom",
-        date: "Mar 9, 2025",
+        title: "I would prefer to give ZERO stars",
+        text: "I would prefer to give ZERO stars, but I have to warn others. I invested money in a PAMM account.\nIn the large package, copying is advertised, but it does not work via the copy function that StarTrader also offers. You have to invest in a PAMM, have no insight into the trades, and now I have been waiting for my withdrawal for 4 weeks.\nEither they remain silent or there are endless excuses. At the moment, this looks very much like fraud.",
+        name: "Jani Geissler",
+        date: "October 14, 2025",
         stars: 5,
         verified: true,
       },
       {
-        title: "Sehr hilfreich",
-        text: "Strukturierte Signale und eine gute Community. Ich komme schneller voran als vorher.",
-        name: "M. Braun",
-        date: "Mar 7, 2025",
+        title: "I submitted a review for a company",
+        text: "I submitted a review for a company that behaves very differently from what it promises before you become a customer. I could prove everything with written communication between me and the company, but ProvenExpert.com has not approved or displayed my (below-average) review for weeks. As a result, the picture of the company is not entirely objective.",
+        name: "Andreas Zobel",
+        date: "January 13, 2026",
         stars: 5,
         verified: true,
       },
       {
-        title: "Top Support",
-        text: "Antworten kommen schnell und sind verständlich. Das macht einen großen Unterschied.",
-        name: "A. Fischer",
-        date: "Mar 5, 2025",
-        stars: 5,
-        verified: true,
-      },
-      // add more if you want smoother columns
-      {
-        title: "Sehr zufrieden",
-        text: "Klare Struktur und starke Signale. Ich habe jetzt mehr Vertrauen in meine Entscheidungen.",
-        name: "N. Schmidt",
-        date: "Mar 2, 2025",
+        title: "Honest, clean, successful",
+        text: "I’ve been part of this for almost 5 months now. The signals are excellent. Even though I already had trading experience, I still learned a lot of professional knowledge such as scaling strategies, which helped me a lot. The entries are precise and the given zones are extremely helpful for placing your own trades. Support is great when you have questions. A very likable guy who genuinely means well — I’ve had much worse experiences before. This is where I’ve arrived, and this is where I want to stay. THANK YOU Phenex ❤️",
+        name: "Consumer",
+        date: "December 18, 2025",
         stars: 5,
         verified: true,
       },
       {
-        title: "Mega Community",
-        text: "Hilfsbereit, aktiv und motivierend. Genau das, was mir gefehlt hat.",
-        name: "L. Meyer",
-        date: "Feb 28, 2025",
+        title: "More positives than negatives",
+        text: "Since I started with TSB a few weeks ago, my trading has completely changed. Of course, there are occasional downs, but that’s normal. At the end of the day, what matters is whether you finish in profit or loss. With TSB, most days are definitely profitable, and for that I am truly grateful.",
+        name: "Lea Schäfer",
+        date: "March 17, 2025",
         stars: 5,
         verified: true,
       },
       {
-        title: "Einfach & effektiv",
-        text: "Ich spare Zeit, weil die Signale klar sind. Das macht den Unterschied.",
-        name: "P. Wagner",
-        date: "Feb 25, 2025",
+        title: "Profit with own and funded capital",
+        text: "I started with my own capital. Unfortunately, I didn’t have much money to deposit into my personal account, so I bought a funded capital challenge. Thanks to the trades from the VIP group, I passed the challenge within one week. I am now funded and able to trade significantly more profit.",
+        name: "Henry Keller",
+        date: "March 19, 2025",
         stars: 5,
         verified: true,
       },
       {
-        title: "Klare Empfehlung",
-        text: "Support reagiert schnell und die Inhalte sind verständlich – top!",
-        name: "K. Becker",
-        date: "Feb 22, 2025",
+        title: "VIP group is truly 10/10",
+        text: "The VIP group is absolutely amazing. I already think the free group is really good, but the VIP group is on a completely different level. Daily trades and market analyses that actually help you understand what’s happening. Many thanks again to the TSB team.",
+        name: "Moritz Weiß",
+        date: "March 17, 2025",
         stars: 5,
         verified: true,
       },
@@ -142,24 +145,25 @@ export default function SocialProofTestimonials() {
           </p>
         </motion.div>
 
-        {/* Logos marquee (same behavior) */}
+        {/* Logos marquee */}
         <div className="mt-10 rounded-3xl border border-slate-200 bg-white p-9 shadow-sm">
-         
-          <LogoMarquee  logos={logos}  />
+          <LogoMarquee logos={logos} />
         </div>
 
-        {/* Columns (your same animation style) */}
+        {/* Columns */}
         <div className="mt-10 flex justify-center gap-6 max-h-[740px] overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,black_20%,black_80%,transparent)]">
-          <TestimonialsColumnTSB testimonials={firstColumn} duration={15} />
+          <TestimonialsColumnTSB testimonials={firstColumn} duration={15} link={CTA_LINK} />
           <TestimonialsColumnTSB
             testimonials={secondColumn}
             className="hidden md:block"
             duration={19}
+            link={CTA_LINK}
           />
           <TestimonialsColumnTSB
             testimonials={thirdColumn}
             className="hidden lg:block"
             duration={17}
+            link={CTA_LINK}
           />
         </div>
       </div>
@@ -172,9 +176,7 @@ export default function SocialProofTestimonials() {
 function LogoMarquee({ logos }: { logos: Logo[] }) {
   return (
     <div className="mt-4 overflow-hidden">
-      {/* container needs group for hover pause */}
       <div className="group relative">
-        {/* Track 1 */}
         <div
           className="flex items-center gap-12 py-2 will-change-transform [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]"
           aria-label="Media logos"
@@ -192,7 +194,6 @@ function LogoMarquee({ logos }: { logos: Logo[] }) {
             ))}
           </div>
 
-          {/* Track 2 (duplicate) */}
           <div className="flex items-center gap-12 animate-marquee-left2 group-hover:[animation-play-state:paused]">
             {logos.map((l, idx) => (
               <img
@@ -233,4 +234,3 @@ function LogoMarquee({ logos }: { logos: Logo[] }) {
     </div>
   );
 }
-

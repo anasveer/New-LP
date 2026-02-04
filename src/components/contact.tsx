@@ -7,7 +7,6 @@ import { cn } from "../../lib/utils";
 type FinalCtaProps = {
   title?: string;
   buttonText?: string;
-  buttonHref?: string;
   bgImage: string;
   logoImage: string;
   className?: string;
@@ -16,7 +15,7 @@ type FinalCtaProps = {
 export function FinalCta({
   title = "START TRADING WITH THE WORLD’S\nFASTEST-GROWING BROKER",
   buttonText = "Join the FREE Group",
-  buttonHref = "#",
+  
   bgImage,
   logoImage,
   className,
@@ -24,7 +23,7 @@ export function FinalCta({
   const reduce = useReducedMotion();
 
   return (
-    <section className={cn("w-full", className)}>
+    <section id="contact" className={cn("w-full", className)}>
       <motion.div
         initial={{ opacity: 0, y: reduce ? 0 : 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -37,12 +36,12 @@ export function FinalCta({
         )}
       >
         {/* Background Image */}
-        <reve>
+      
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url(${bgImage})` }}
         />
-        </reve>
+      
 
         {/* Dark overlay for readability */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/55 to-black/70" />
@@ -67,24 +66,27 @@ export function FinalCta({
 
           {/* CTA Button (single) */}
           <motion.a
-            href={buttonHref}
-            initial={{ opacity: 0, y: reduce ? 0 : 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.25 }}
-            whileHover={reduce ? {} : { scale: 1.05 }}
-            whileTap={reduce ? {} : { scale: 0.98 }}
-            className={cn(
-              "mt-8 inline-flex items-center justify-center",
-              "rounded-full px-7 py-3.5",
-              "text-sm sm:text-base font-semibold",
-              "text-black",
-              "bg-gradient-to-r from-cyan-400 via-emerald-400 to-teal-400",
-              "shadow-[0_20px_60px_-20px_rgba(0,255,200,0.6)]",
-              "transition-all"
-            )}
-          >
-            {buttonText}
-          </motion.a>
+  href='https://t.me/+ilBOOK3W_wtiMjZi'
+  target="_blank"
+  rel="noopener noreferrer"
+  initial={{ opacity: 0, y: reduce ? 0 : 12 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.6, delay: 0.25 }}
+  whileHover={reduce ? {} : { scale: 1.05 }}
+  whileTap={reduce ? {} : { scale: 0.98 }}
+  className={cn(
+    "mt-8 inline-flex items-center justify-center",
+    "rounded-full px-7 py-3.5",
+    "text-sm sm:text-base font-semibold",
+    "text-black",
+    "bg-gradient-to-r from-cyan-400 via-emerald-400 to-teal-400",
+    "shadow-[0_20px_60px_-20px_rgba(0,255,200,0.6)]",
+    "transition-all"
+  )}
+>
+  {buttonText}
+</motion.a>
+
 
           {/* Brand */}
           <motion.div

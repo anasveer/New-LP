@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
+import logo from "../assets/logo.png";
 
 type NavItem = { id: string; label: string };
 
@@ -7,6 +8,7 @@ const NAV_ITEMS: NavItem[] = [
   { id: "why", label: "Why TSB?" },
   { id: "testimonials", label: "Testimonials" },
   { id: "faq", label: "FAQ" },
+  
 ];
 
 function cn(...classes: Array<string | false | undefined>) {
@@ -63,13 +65,15 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 ">
       <div
-        className={cn(
-          "border-b transition-all",
-          scrolled
-            ? "border-slate-200/70 bg-white/80 backdrop-blur shadow-sm"
-            : "border-transparent bg-white"
-        )}
-      >
+  className={cn(
+    "border-b transition-all",
+   scrolled
+  ? "border-white/10 bg-gradient-to-r from-[#0F172A]/80 via-[#1E3A8A]/80 to-[#4C1D95]/80 backdrop-blur-xl shadow-2xl"
+  : "border-transparent bg-gradient-to-r from-[#020617] via-[#0F172A] to-[#1E3A8A]"
+)}
+
+>
+
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6">
           {/* Brand */}
           <button
@@ -79,49 +83,43 @@ export default function Navbar() {
             aria-label="Go to top"
           >
             <img
-              src="/src/assets/logo.png"
-              alt="The Signals Bank"
-              width={34}
-              height={34}
-              decoding="async"
-              loading="eager"
-              className="h-9 w-9 rounded-xl ring-1 ring-black/5"
-            />
-            <div className="text-left leading-tight">
-              <p className="text-xs font-medium text-slate-500">The</p>
-              <p className="text-sm font-semibold text-slate-900">Signals Bank</p>
-            </div>
+    src={logo}
+    alt="The Signals Bank"
+    className="h-10 w-50"
+  />
+           
           </button>
 
           {/* Desktop Nav */}
-          <nav className="hidden items-center gap-1 lg:flex" aria-label="Primary">
-            {items.map((it) => (
-              <button
-                key={it.id}
-                type="button"
-                onClick={() => goTo(it.id)}
-                className={cn(
-                  "rounded-full px-4 py-2 text-sm font-medium transition",
-                  active === it.id
-                    ? "bg-slate-900 text-white"
-                    : "text-slate-700 hover:bg-slate-100"
-                )}
-              >
-                {it.label}
-              </button>
-            ))}
-          </nav>
+         <nav className="hidden items-center gap-1 lg:flex" aria-label="Primary">
+  {items.map((it) => (
+    <button
+      key={it.id}
+      type="button"
+      onClick={() => goTo(it.id)}
+      className={cn(
+        "rounded-full px-4 py-2 text-sm font-medium transition-all duration-200",
+        active === it.id
+          ? "bg-white/90 text-slate-900 shadow-sm"
+          : "text-white/80 hover:bg-white/15 hover:text-white"
+      )}
+    >
+      {it.label}
+    </button>
+  ))}
+</nav>
 
           {/* Right actions */}
           <div className="flex items-center gap-2">
             {/* Desktop CTA */}
-            <button
-              type="button"
-              onClick={() => goTo("join")}
+            <a
+              href="https://t.me/+ilBOOK3W_wtiMjZi"
+              target="_blank"
+              rel="noopener noreferrer"
               className="hidden rounded-full bg-gradient-to-r from-[#1FB6C8] to-[#6C49D8] px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:translate-y-[-1px] hover:bg-slate-800 active:translate-y-0 sm:inline-flex"
             >
               Join Now
-            </button>
+            </a>
 
 
             {/* Mobile menu button */}
@@ -165,9 +163,9 @@ export default function Navbar() {
                 <img
                   src="/src/assets/logo.png"
                   alt="The Signals Bank"
-                  width={32}
+                  width={62}
                   height={32}
-                  className="h-8 w-8 rounded-xl ring-1 ring-black/5"
+                  className="h-8 w-8  "
                 />
                 <p className="text-sm font-semibold text-slate-900">The Signals Bank</p>
               </div>
@@ -212,13 +210,14 @@ export default function Navbar() {
               </div>
 
               <div className="mt-6 space-y-3">
-                <button
-                  type="button"
-                  onClick={() => goTo("join")}
+                <a
+                  href="https://t.me/+ilBOOK3W_wtiMjZi"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-full rounded-2xl bg-slate-900 px-5 py-3 text-sm font-semibold text-white shadow-sm transition active:scale-[0.99]"
                 >
                   Join Now
-                </button>
+                </a>
 
                 
 
