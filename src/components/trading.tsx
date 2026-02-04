@@ -5,13 +5,16 @@ import { motion, useReducedMotion } from "framer-motion";
 import { ArrowUpRight, CheckCircle2 } from "lucide-react";
 import { cn } from "../../lib/utils";
 
+// ✅ Vite/Vercel build-safe image import (adjust path if needed)
+import tradingImg from "../assets/trading.png";
+
 type TradingCtaProps = {
   title?: string;
   subtitle?: string;
   bullets?: string[];
   buttonText?: string;
   buttonHref?: string;
-  imageSrc?: string; // made optional so default can work
+  imageSrc?: string;
   imageAlt?: string;
   className?: string;
 };
@@ -29,11 +32,10 @@ export function TradingCta({
   buttonHref = "#",
   imageAlt = "Trading app preview",
   className,
-  imageSrc = "/src/assets/trading.png",
+  imageSrc = tradingImg, // ✅ default uses imported asset (works on Vercel)
 }: TradingCtaProps) {
   const reduce = useReducedMotion();
 
-  // Reusable motion configs (NO variants)
   const fadeUp = (delay = 0) => ({
     initial: { opacity: 0, y: reduce ? 0 : 14 },
     whileInView: { opacity: 1, y: 0 },
@@ -52,7 +54,7 @@ export function TradingCta({
     <section className={cn("w-full", className)}>
       <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-10">
         <div className="grid items-center gap-10 lg:gap-12 grid-cols-1 lg:grid-cols-2">
-          {/* LEFT: IMAGE (NO CARD BG, NO RING, NO SHADOW) */}
+          {/* LEFT: IMAGE */}
           <motion.div
             {...fadeUp(0)}
             className="relative flex justify-center lg:justify-start"
@@ -61,14 +63,11 @@ export function TradingCta({
               src={imageSrc}
               alt={imageAlt}
               draggable={false}
-              // ✅ ONLY image size, not extra tall
               className={cn(
                 "w-full max-w-[320px] sm:max-w-[380px] lg:max-w-[420px]",
                 "h-auto object-contain select-none",
-                // if your image has transparent bg, this will look perfect
                 "drop-shadow-[0_18px_45px_rgba(0,0,0,0.22)]"
               )}
-              // ✅ hover animation without container bg
               whileHover={
                 reduce
                   ? {}
@@ -81,11 +80,6 @@ export function TradingCta({
               whileTap={reduce ? {} : { scale: 0.99 }}
               transition={{ type: "spring", stiffness: 220, damping: 18 }}
             />
-
-            {/* NOTE:
-              If image itself has white background (not transparent),
-              code cannot truly remove it. You must use transparent PNG.
-            */}
           </motion.div>
 
           {/* RIGHT: CONTENT */}
@@ -137,22 +131,17 @@ export function TradingCta({
                   "focus:outline-none focus:ring-2 focus:ring-neutral-900/20"
                 )}
               >
-                {/* button gradient */}
                 <span className="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-500 via-violet-500 to-emerald-500" />
 
-                {/* shimmer on hover */}
                 <span className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 overflow-hidden">
                   <span className="absolute -left-1/3 top-0 h-full w-1/3 skew-x-[-20deg] bg-white/20 blur-md animate-[shimmer_1.4s_ease-in-out_infinite]" />
                 </span>
 
-                {/* content */}
                 <span className="relative flex items-center gap-2">
                   {buttonText}
                   <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                 </span>
               </a>
-
-              
             </motion.div>
 
             <motion.div
@@ -163,7 +152,6 @@ export function TradingCta({
         </div>
       </div>
 
-      {/* ✅ React/Vite compatible style tag (NOT style jsx) */}
       <style>{`
         @keyframes shimmer {
           0% { transform: translateX(-60%) skewX(-20deg); opacity: 0; }

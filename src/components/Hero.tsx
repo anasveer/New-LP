@@ -84,7 +84,8 @@ export default function Hero({
           <div className="mt-6 grid items-center gap-12 lg:grid-cols-12">
             {/* Left: Copy */}
             <div className="lg:col-span-6">
-              <h1 className="text-balance text-3xl font-extrabold tracking-tight leading-[1.2] text-slate-900 sm:text-5xl">
+              <h1 className="mx-auto text-center sm:text-left text-balance text-3xl font-extrabold tracking-tight leading-[1.2] text-slate-900 sm:text-5xl">
+
                 JOIN TSB AND BENEFIT DAILY FROM{" "}
                 <span className="relative inline-block">
                   <span className="relative z-10">OUR FREE TRADING SIGNALS</span>

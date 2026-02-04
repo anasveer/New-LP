@@ -1,23 +1,25 @@
 "use client";
 
-
 import { motion, useReducedMotion } from "framer-motion";
 import { cn } from "../../lib/utils";
+
+// ✅ Vite/Vercel build-safe imports (path adjust if needed)
+import bgImg from "../assets/trading.png";   // <-- apni file ka naam yahan set karo
+import logoImg from "../assets/fav.webp";         // <-- ya apna logo.png/webp
 
 type FinalCtaProps = {
   title?: string;
   buttonText?: string;
-  bgImage: string;
-  logoImage: string;
+  bgImage?: string;   // ✅ optional
+  logoImage?: string; // ✅ optional
   className?: string;
 };
 
 export function FinalCta({
   title = "START TRADING WITH THE WORLD’S\nFASTEST-GROWING BROKER",
   buttonText = "Join the FREE Group",
-  
-  bgImage,
-  logoImage,
+  bgImage = bgImg,       // ✅ default uses imported asset
+  logoImage = logoImg,   // ✅ default uses imported asset
   className,
 }: FinalCtaProps) {
   const reduce = useReducedMotion();
@@ -31,17 +33,14 @@ export function FinalCta({
         transition={{ duration: 0.7, ease: "easeOut" }}
         className={cn(
           "relative mx-auto w-full max-w-7xl",
-          // 🔥 top & bottom rounded only
           "rounded-t-3xl rounded-b-3xl overflow-hidden"
         )}
       >
         {/* Background Image */}
-      
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url(${bgImage})` }}
         />
-      
 
         {/* Dark overlay for readability */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/55 to-black/70" />
@@ -66,27 +65,26 @@ export function FinalCta({
 
           {/* CTA Button (single) */}
           <motion.a
-  href='https://t.me/+ilBOOK3W_wtiMjZi'
-  target="_blank"
-  rel="noopener noreferrer"
-  initial={{ opacity: 0, y: reduce ? 0 : 12 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.6, delay: 0.25 }}
-  whileHover={reduce ? {} : { scale: 1.05 }}
-  whileTap={reduce ? {} : { scale: 0.98 }}
-  className={cn(
-    "mt-8 inline-flex items-center justify-center",
-    "rounded-full px-7 py-3.5",
-    "text-sm sm:text-base font-semibold",
-    "text-black",
-    "bg-gradient-to-r from-cyan-400 via-emerald-400 to-teal-400",
-    "shadow-[0_20px_60px_-20px_rgba(0,255,200,0.6)]",
-    "transition-all"
-  )}
->
-  {buttonText}
-</motion.a>
-
+            href="https://t.me/+ilBOOK3W_wtiMjZi"
+            target="_blank"
+            rel="noopener noreferrer"
+            initial={{ opacity: 0, y: reduce ? 0 : 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.25 }}
+            whileHover={reduce ? {} : { scale: 1.05 }}
+            whileTap={reduce ? {} : { scale: 0.98 }}
+            className={cn(
+              "mt-8 inline-flex items-center justify-center",
+              "rounded-full px-7 py-3.5",
+              "text-sm sm:text-base font-semibold",
+              "text-black",
+              "bg-gradient-to-r from-cyan-400 via-emerald-400 to-teal-400",
+              "shadow-[0_20px_60px_-20px_rgba(0,255,200,0.6)]",
+              "transition-all"
+            )}
+          >
+            {buttonText}
+          </motion.a>
 
           {/* Brand */}
           <motion.div
@@ -101,10 +99,11 @@ export function FinalCta({
               className="h-12 w-auto"
               draggable={false}
             />
-           
           </motion.div>
         </div>
       </motion.div>
     </section>
   );
 }
+
+export default FinalCta;
