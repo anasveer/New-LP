@@ -4,12 +4,16 @@ import { cn } from "../../lib/utils";
 type FinalCtaProps = {
   title?: string;
   buttonText?: string;
+  bgImage?: string;
+  logoImage?: string;
   className?: string;
 };
 
 export function FinalCta({
   title = "START TRADING WITH THE WORLD’S\nFASTEST-GROWING BROKER",
   buttonText = "Join the FREE Group",
+  bgImage,
+  logoImage,
   className,
 }: FinalCtaProps) {
   const reduce = useReducedMotion();
@@ -21,19 +25,18 @@ export function FinalCta({
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.7, ease: "easeOut" }}
-        className="
-          relative mx-auto w-full max-w-7xl
-          rounded-3xl overflow-hidden
-          bg-gradient-to-br
-          from-blue-600 via-cyan-500 to-emerald-500
-        "
+        className="relative mx-auto w-full max-w-7xl rounded-3xl overflow-hidden"
       >
-        {/* Glass overlay for fancy depth */}
-        <div className="absolute inset-0 bg-black/20 backdrop-blur-sm" />
+        {/* Background image */}
+        {bgImage && (
+          <div
+            className="absolute inset-0 bg-cover bg-center"
+            style={{ backgroundImage: `url("${bgImage}")` }}
+          />
+        )}
 
-        {/* Glow effect */}
-        <div className="absolute -top-32 -right-32 h-96 w-96 rounded-full bg-cyan-400/30 blur-3xl" />
-        <div className="absolute -bottom-32 -left-32 h-96 w-96 rounded-full bg-blue-500/30 blur-3xl" />
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/55 to-black/70" />
 
         {/* Content */}
         <div className="relative z-10 flex flex-col items-center justify-center text-center px-6 py-20 sm:py-24 lg:py-28">
@@ -41,11 +44,7 @@ export function FinalCta({
             initial={{ opacity: 0, y: reduce ? 0 : 14 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="
-              text-white
-              text-2xl sm:text-3xl lg:text-4xl
-              font-extrabold tracking-tight leading-snug
-            "
+            className="text-white text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight leading-snug"
             style={{ whiteSpace: "pre-line" }}
           >
             {title}
@@ -58,19 +57,27 @@ export function FinalCta({
             initial={{ opacity: 0, y: reduce ? 0 : 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.25 }}
-            whileHover={reduce ? {} : { scale: 1.06 }}
-            whileTap={reduce ? {} : { scale: 0.97 }}
-            className="
-              mt-8 inline-flex items-center justify-center
-              rounded-full px-8 py-4
-              text-sm sm:text-base font-semibold
-              text-blue-900
-              bg-white
-              shadow-[0_25px_70px_-20px_rgba(0,200,255,0.9)]
-            "
+            whileHover={reduce ? {} : { scale: 1.05 }}
+            whileTap={reduce ? {} : { scale: 0.98 }}
+            className="mt-8 inline-flex items-center justify-center rounded-full px-7 py-3.5 text-sm sm:text-base font-semibold text-black bg-gradient-to-r from-cyan-400 via-emerald-400 to-teal-400 shadow-[0_20px_60px_-20px_rgba(0,255,200,0.6)]"
           >
             {buttonText}
           </motion.a>
+
+          {logoImage && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="mt-10 flex items-center gap-3 text-white/90"
+            >
+              <img
+                src={logoImage}
+                alt="The Signals Bank"
+                className="h-12 w-auto"
+              />
+            </motion.div>
+          )}
         </div>
       </motion.div>
     </section>

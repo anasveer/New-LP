@@ -11,6 +11,8 @@ import { WhoIsSimon  } from "./components/simon";
 import { FaqAccordion, type FaqItem } from "./components/faqs";
 import { FinalCta } from "./components/contact";
 import {  SiteFooter } from "./components/footer";
+import laptopImg from "../src/assets/laptop.jpg";
+import logoImg from "../src/assets/logo.png";
 
 export default function App() {
 
@@ -126,14 +128,12 @@ You’ll also get access to a free 5-hour video course and a global community of
         defaultOpenId="profitable"
         allowMultiple={false}
       />
-
-      <div className="py-20">
-      <FinalCta
-        bgImage="/src/assets/laptop.jpg"   // chart / galaxy style image
-        logoImage="/src/assets/logo.png"       // end wala logo
-        
-      />
-    </div>
+<div className="py-20">
+  <FinalCta
+    bgImage={laptopImg}
+    logoImage={logoImg}
+  />
+</div>
 
     <SiteFooter
         logoSrc="/images/logo-round.png"
