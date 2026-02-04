@@ -14,15 +14,12 @@ import {
   CreditCard,
 } from "lucide-react";
 import { cn } from "../../lib/utils";
-import favLogo from "../assets/fav.webp";
-
-
-
+// import favLogo from "../assets/fav.webp";
 
 type FooterProps = {
   className?: string;
   brandName?: string;
-  logoSrc?: string; // left round logo
+  logoSrc?: string; // ✅ string url only
   contactEmail?: string;
   social?: {
     facebook?: string;
@@ -38,9 +35,7 @@ type FooterProps = {
 export function SiteFooter({
   className,
   brandName = "The Signals Bank",
-  logoSrc = favLogo,
-
-
+  // logoSrc, // ✅ keep optional
   contactEmail = "support@thesignalsbank.com",
   social = {
     facebook: "#",
@@ -53,6 +48,9 @@ export function SiteFooter({
   companyInfo = `THESIGNALBANK International PTY Limited • Company Registration: 65439795 • Address: Level 35, 31 Market Street, Sydney NSW 2000, Australia`,
 }: FooterProps) {
   const reduce = useReducedMotion();
+
+  // ✅ Vite-safe: imported favLogo is already a string URL
+  // const resolvedLogoSrc = logoSrc?.trim() ? logoSrc : favLogo;
 
   const fadeUp = (delay = 0) => ({
     initial: { opacity: 0, y: reduce ? 0 : 14 },
@@ -67,10 +65,6 @@ export function SiteFooter({
     viewport: { once: true, amount: 0.2 },
     transition: { duration: 0.45, delay, ease: [0.16, 1, 0.3, 1] as any },
   });
-
-  const resolvedLogoSrc =
-  typeof logoSrc === "string" ? logoSrc : (favLogo as unknown as string);
-
 
   return (
     <footer
@@ -145,15 +139,14 @@ export function SiteFooter({
               <div className="flex items-center gap-4">
                 <div className="relative">
                   <div className="absolute -inset-[1px] rounded-full bg-gradient-to-br from-cyan-400/30 via-violet-500/20 to-emerald-400/25" />
-                  <div className="relative h-16 w-16 overflow-hidden rounded-full bg-white/5 ring-1 ring-white/10">
-                  <img
-  src={resolvedLogoSrc}
-  alt={brandName}
-  className="h-full w-full object-cover"
-  draggable={false}
-/>
-
-                  </div>
+                  {/* <div className="relative h-16 w-16 overflow-hidden rounded-full bg-white/5 ring-1 ring-white/10">
+                     <img
+                      src={resolvedLogoSrc}
+                      alt={brandName}
+                      className="h-full w-full object-cover"
+                      draggable={false}
+                    />
+                  </div>  */}
                 </div>
 
                 <div>
@@ -199,7 +192,6 @@ export function SiteFooter({
 
             <div className="flex flex-wrap items-center gap-3">
               <PayChip label="VISA" />
-             
             </div>
           </motion.div>
 
