@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useMemo } from "react";
+import  { useMemo } from "react";
 import { motion } from "framer-motion";
 import { TestimonialsColumnTSB } from "./ui/testimonial-column";
 

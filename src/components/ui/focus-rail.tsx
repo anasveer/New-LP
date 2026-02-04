@@ -3,7 +3,8 @@
 import * as React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import type { PanInfo } from "framer-motion";
-import { ChevronLeft, ChevronRight, ArrowUpRight } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+
 import { cn } from "../../../lib/utils";
 
 export type FocusRailItem = {
@@ -139,9 +140,10 @@ export function FocusRail({
   };
 
   const onDragEnd = (
-    e: MouseEvent | TouchEvent | PointerEvent,
-    { offset, velocity }: PanInfo
-  ) => {
+  _e: MouseEvent | TouchEvent | PointerEvent,
+  { offset, velocity }: PanInfo
+) => {
+
     const swipe = swipePower(offset.x, velocity.x);
 
     if (swipe < -swipeConfidenceThreshold) {

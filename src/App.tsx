@@ -131,7 +131,7 @@ You’ll also get access to a free 5-hour video course and a global community of
       <FinalCta
         bgImage="/src/assets/laptop.jpg"   // chart / galaxy style image
         logoImage="/src/assets/logo.png"       // end wala logo
-        buttonHref="#join"
+        
       />
     </div>
 

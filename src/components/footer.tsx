@@ -17,6 +17,8 @@ import { cn } from "../../lib/utils";
 import favLogo from "../assets/fav.webp";
 
 
+
+
 type FooterProps = {
   className?: string;
   brandName?: string;
@@ -37,6 +39,7 @@ export function SiteFooter({
   className,
   brandName = "The Signals Bank",
   logoSrc = favLogo,
+
 
   contactEmail = "support@thesignalsbank.com",
   social = {
@@ -64,6 +67,10 @@ export function SiteFooter({
     viewport: { once: true, amount: 0.2 },
     transition: { duration: 0.45, delay, ease: [0.16, 1, 0.3, 1] as any },
   });
+
+  const resolvedLogoSrc =
+  typeof logoSrc === "string" ? logoSrc : (favLogo as unknown as string);
+
 
   return (
     <footer
@@ -139,12 +146,13 @@ export function SiteFooter({
                 <div className="relative">
                   <div className="absolute -inset-[1px] rounded-full bg-gradient-to-br from-cyan-400/30 via-violet-500/20 to-emerald-400/25" />
                   <div className="relative h-16 w-16 overflow-hidden rounded-full bg-white/5 ring-1 ring-white/10">
-                    <img
-                      src={(logoSrc as any)?.src ?? (logoSrc as any)}
-                      alt={brandName}
-                      className="h-full w-full object-cover"
-                      draggable={false}
-                    />
+                  <img
+  src={resolvedLogoSrc}
+  alt={brandName}
+  className="h-full w-full object-cover"
+  draggable={false}
+/>
+
                   </div>
                 </div>
 

@@ -11,6 +11,8 @@ import {
   ArrowRight,
 } from "lucide-react";
 
+import heroImg from "../assets/hero.webp"; // ✅ Vite build-safe import
+
 type HeroProps = {
   onPrimaryCta?: () => void;
   onSecondaryCta?: () => void;
@@ -32,7 +34,10 @@ function StarRow() {
   );
 }
 
-export default function Hero({ onPrimaryCta, onSecondaryCta }: HeroProps) {
+export default function Hero({
+  onPrimaryCta: _onPrimaryCta, // ✅ keep prop but silence TS unused error
+  onSecondaryCta,
+}: HeroProps) {
   return (
     <main id="home">
       {/* ===== HERO SECTION (Heading + Image only) ===== */}
@@ -90,31 +95,28 @@ export default function Hero({ onPrimaryCta, onSecondaryCta }: HeroProps) {
                 </span>
               </h1>
 
-              
-
               <div className="mt-7 flex flex-col items-start gap-3 sm:flex-row">
-               <a
-  href="https://t.me/+ilBOOK3W_wtiMjZi"
-  target="_blank"
-  rel="noopener noreferrer"
-  className="group inline-flex w-full items-center justify-center rounded-full
-             bg-gradient-to-r from-[#1FB6C8] to-[#6C49D8]
-             px-7 py-3 text-sm font-semibold text-white
-             shadow-lg shadow-[#6C49D8]/15 transition
-             hover:-translate-y-0.5 active:translate-y-0 sm:w-auto"
->
-  Join the FREE Group
-  <ArrowRight className="ml-2 h-4 w-4 transition group-hover:translate-x-1" />
-</a>
+                <a
+                  href="https://t.me/+ilBOOK3W_wtiMjZi"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group inline-flex w-full items-center justify-center rounded-full
+                             bg-gradient-to-r from-[#1FB6C8] to-[#6C49D8]
+                             px-7 py-3 text-sm font-semibold text-white
+                             shadow-lg shadow-[#6C49D8]/15 transition
+                             hover:-translate-y-0.5 active:translate-y-0 sm:w-auto"
+                >
+                  Join the FREE Group
+                  <ArrowRight className="ml-2 h-4 w-4 transition group-hover:translate-x-1" />
+                </a>
 
-
-                {onPrimaryCta ? (
+                {onSecondaryCta ? (
                   <button
                     type="button"
-                    onClick={onPrimaryCta}
+                    onClick={onSecondaryCta}
                     className="inline-flex w-full items-center justify-center rounded-full bg-white/70 px-7 py-3 text-sm font-semibold text-slate-900 ring-1 ring-black/10 backdrop-blur transition hover:bg-white sm:w-auto"
                   >
-                    
+                    Learn More
                   </button>
                 ) : null}
               </div>
@@ -129,7 +131,7 @@ export default function Hero({ onPrimaryCta, onSecondaryCta }: HeroProps) {
                     className="pointer-events-none absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-white/80 to-transparent"
                   />
                   <img
-                    src="/src/assets/hero.webp"
+                    src={heroImg} // ✅ same UI, build-safe
                     alt="The Signals Bank"
                     width={1200}
                     height={720}
@@ -147,44 +149,20 @@ export default function Hero({ onPrimaryCta, onSecondaryCta }: HeroProps) {
       {/* ===== CARDS SECTION (Separate, centered like second section) ===== */}
       <section className="relative bg-gradient-to-b from-[#F1F7FF] via-white to-white pb-20 pt-16">
         {/* Optional: top separator glow */}
-        <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 -top-10 mx-auto h-24 max-w-6xl rounded-[40px] bg-gradient-to-r from-[#1FB6C8]/10 via-[#6C49D8]/10 to-[#1FB6C8]/10 blur-2xl" />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-x-0 -top-10 mx-auto h-24 max-w-6xl rounded-[40px] bg-gradient-to-r from-[#1FB6C8]/10 via-[#6C49D8]/10 to-[#1FB6C8]/10 blur-2xl"
+        />
 
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
-          {/* Section heading (center) */}
-          
-
           {/* Cards grid (center feel) */}
           <div className="mx-auto grid max-w-6xl gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            <InfoCard
-              icon={<TrendingUp className="h-5 w-5" />}
-              title="2024 Best Forex Trading App"
-              text="Global 100 Awards EMC Publish."
-            />
-            <InfoCard
-              icon={<Brain className="h-5 w-5" />}
-              title="2024 Best Forex Affliate Broker of The Year"
-              text="Profx Awards Dubai."
-            />
-            <InfoCard
-              icon={<Users className="h-5 w-5" />}
-              title="The Best FX/CYPTO Technology & Liquidity provider "
-              text="Egypt Expo."
-            />
-            <InfoCard
-              icon={<BadgeCheck className="h-5 w-5" />}
-              title="2024 Most Trusted Forex Broker Of The Year "
-              text="Profx Awards Dubai."
-            />
-            <InfoCard
-              icon={<Zap className="h-5 w-5" />}
-              title="2024 Best Forex Trading App Of The Year"
-              text="Global 100 Awards EMG Publish."
-            />
-            <InfoCard
-              icon={<Gift className="h-5 w-5" />}
-              title="The Fastest Growing Broker"
-              text="2022 Dubai Expo."
-            />
+            <InfoCard icon={<TrendingUp className="h-5 w-5" />} title="2024 Best Forex Trading App" text="Global 100 Awards EMC Publish." />
+            <InfoCard icon={<Brain className="h-5 w-5" />} title="2024 Best Forex Affliate Broker of The Year" text="Profx Awards Dubai." />
+            <InfoCard icon={<Users className="h-5 w-5" />} title="The Best FX/CYPTO Technology & Liquidity provider " text="Egypt Expo." />
+            <InfoCard icon={<BadgeCheck className="h-5 w-5" />} title="2024 Most Trusted Forex Broker Of The Year " text="Profx Awards Dubai." />
+            <InfoCard icon={<Zap className="h-5 w-5" />} title="2024 Best Forex Trading App Of The Year" text="Global 100 Awards EMG Publish." />
+            <InfoCard icon={<Gift className="h-5 w-5" />} title="The Fastest Growing Broker" text="2022 Dubai Expo." />
           </div>
         </div>
       </section>
@@ -218,9 +196,7 @@ function InfoCard({
         </div>
 
         <div className="min-w-0">
-          <p className="text-sm font-extrabold leading-snug text-slate-900">
-            {title}
-          </p>
+          <p className="text-sm font-extrabold leading-snug text-slate-900">{title}</p>
           <div className="my-2 h-px w-14 bg-slate-900/15" />
           <p className="text-sm leading-relaxed text-slate-600">{text}</p>
         </div>

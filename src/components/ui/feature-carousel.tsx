@@ -6,9 +6,9 @@ import { Button } from "./button"
 import { cn } from "../../../lib/utils"
 
 // --- TYPES ---
-interface HeroProps extends React.HTMLAttributes<HTMLDivElement> {
+interface HeroProps
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, "title"> {
   title: React.ReactNode
-  
   images: { src: string; alt: string }[]
   appStoreLink?: string
   googlePlayLink?: string
@@ -55,10 +55,9 @@ export const HeroSection = React.forwardRef<HTMLDivElement, HeroProps>(
         <div className="z-10 flex w-full flex-col items-center text-center space-y-8 md:space-y-12">
           {/* Header Section */}
           <div className="space-y-4">
-            <h1 className="text-3xl  md:text-4xl font-bold tracking-tighter max-w-4xl">
+            <h1 className="text-3xl md:text-4xl font-bold tracking-tighter max-w-4xl">
               {title}
             </h1>
-           
           </div>
 
           {/* Main Showcase Section */}
