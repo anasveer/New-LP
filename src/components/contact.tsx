@@ -12,8 +12,8 @@ type FinalCtaProps = {
 export function FinalCta({
   title = "START TRADING WITH THE WORLD’S\nFASTEST-GROWING BROKER",
   buttonText = "Join the FREE Group",
-  bgImage = "/assets/trading.png",
-  logoImage = "/assets/fav.webp",
+  bgImage = `${import.meta.env.BASE_URL}assets/trading.png`,
+  logoImage = `${import.meta.env.BASE_URL}assets/fav.webp`,
   className,
 }: FinalCtaProps) {
   const reduce = useReducedMotion();
@@ -27,16 +27,12 @@ export function FinalCta({
         transition={{ duration: 0.7, ease: "easeOut" }}
         className="relative mx-auto w-full max-w-7xl rounded-3xl overflow-hidden"
       >
-        {/* Background */}
         <div
           className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${bgImage})` }}
+          style={{ backgroundImage: `url("${bgImage}")` }}
         />
-
-        {/* Overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/55 to-black/70" />
 
-        {/* Content */}
         <div className="relative z-10 flex flex-col items-center justify-center text-center px-6 py-20 sm:py-24 lg:py-28">
           <motion.h2
             initial={{ opacity: 0, y: reduce ? 0 : 14 }}
