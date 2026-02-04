@@ -1,11 +1,5 @@
-"use client";
-
 import { motion, useReducedMotion } from "framer-motion";
 import { cn } from "../../lib/utils";
-
-// ✅ CORRECT relative paths
-import bgImg from "../assets/trading.png";
-import logoImg from "../assets/fav.webp";
 
 type FinalCtaProps = {
   title?: string;
@@ -18,8 +12,8 @@ type FinalCtaProps = {
 export function FinalCta({
   title = "START TRADING WITH THE WORLD’S\nFASTEST-GROWING BROKER",
   buttonText = "Join the FREE Group",
-  bgImage = bgImg,
-  logoImage = logoImg,
+  bgImage = "/assets/trading.png",
+  logoImage = "/assets/fav.webp",
   className,
 }: FinalCtaProps) {
   const reduce = useReducedMotion();
@@ -33,7 +27,7 @@ export function FinalCta({
         transition={{ duration: 0.7, ease: "easeOut" }}
         className="relative mx-auto w-full max-w-7xl rounded-3xl overflow-hidden"
       >
-        {/* Background Image */}
+        {/* Background */}
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url(${bgImage})` }}
