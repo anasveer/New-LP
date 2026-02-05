@@ -1,7 +1,6 @@
 "use client";
 
 import  { useMemo } from "react";
-import { motion } from "framer-motion";
 import { TestimonialsColumnTSB } from "./ui/testimonial-column";
 
 // ✅ import logos (recommended)
@@ -54,8 +53,8 @@ export default function SocialProofTestimonials() {
         verified: true,
       },
       {
-        title: "I’m honestly still impressed",
-        text: "I’m honestly still impressed.\nTrading gold with Ionut is actually fun.\nEverything he does is structured and the trading is disciplined.\nNo gambling at any time.",
+        title: "Im honestly still impressed",
+        text: "Im honestly still impressed.\nTrading gold with Ionut is actually fun.\nEverything he does is structured and the trading is disciplined.\nNo gambling at any time.",
         name: "Carmen Steck",
         date: "January 2, 2026",
         stars: 5,
@@ -121,11 +120,8 @@ export default function SocialProofTestimonials() {
     <section id="testimonials" className="relative bg-white py-14 sm:py-18">
       <div className="container z-10 mx-auto px-4 sm:px-6">
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 18 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.05 }}
-          viewport={{ once: true }}
+        <div
+         
           className="mx-auto flex max-w-[640px] flex-col items-center justify-center text-center"
         >
           <div className="rounded-lg border border-slate-200 bg-white/70 px-4 py-1 text-xs font-semibold text-slate-600">
@@ -143,7 +139,7 @@ export default function SocialProofTestimonials() {
           <p className="mt-3 max-w-[520px] text-sm text-slate-600 sm:text-base">
             See what our customers have to say about us.
           </p>
-        </motion.div>
+        </div>
 
         {/* Logos marquee */}
         <div className="mt-10 rounded-3xl border border-slate-200 bg-white p-9 shadow-sm">
@@ -174,63 +170,42 @@ export default function SocialProofTestimonials() {
 /* -------------------- Logos Marquee -------------------- */
 
 function LogoMarquee({ logos }: { logos: Logo[] }) {
+  const items = [...logos, ...logos]; // ✅ duplicate once
+
   return (
     <div className="mt-4 overflow-hidden">
-      <div className="group relative">
-        <div
-          className="flex items-center gap-12 py-2 will-change-transform [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]"
-          aria-label="Media logos"
-        >
-          <div className="flex items-center gap-12 animate-marquee-left group-hover:[animation-play-state:paused]">
-            {logos.map((l, idx) => (
-              <img
-                key={`t1-${l.alt}-${idx}`}
-                src={l.src}
-                alt={l.alt}
-                loading="lazy"
-                decoding="async"
-                className="h-8 w-auto opacity-80 grayscale transition hover:opacity-100 hover:grayscale-0 sm:h-10"
-              />
-            ))}
-          </div>
+      <div
+        className="flex w-max items-center gap-12 py-2 will-change-transform
+                   [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]
+                   animate-marquee group-hover:[animation-play-state:paused]"
+        aria-label="Media logos"
+      >
+        {items.map((l, idx) => (
+          <img
+            key={`${l.alt}-${idx}`}
+            src={l.src}
+            alt={l.alt}
+            loading="lazy"
+            decoding="async"
+            className="h-8 w-auto shrink-0 opacity-80 grayscale transition hover:opacity-100 hover:grayscale-0 sm:h-10"
+          />
+        ))}
 
-          <div className="flex items-center gap-12 animate-marquee-left2 group-hover:[animation-play-state:paused]">
-            {logos.map((l, idx) => (
-              <img
-                key={`t2-${l.alt}-${idx}`}
-                src={l.src}
-                alt={l.alt}
-                loading="lazy"
-                decoding="async"
-                className="h-8 w-auto opacity-80 grayscale transition hover:opacity-100 hover:grayscale-0 sm:h-10"
-              />
-            ))}
-          </div>
-        </div>
-      </div>
-
-      <style>{`
-        @keyframes marqueeLeft {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-100%); }
-        }
-        @keyframes marqueeLeft2 {
-          0% { transform: translateX(100%); }
-          100% { transform: translateX(0); }
-        }
-        .animate-marquee-left {
-          animation: marqueeLeft 22s linear infinite;
-        }
-        .animate-marquee-left2 {
-          animation: marqueeLeft2 22s linear infinite;
-        }
-        @media (prefers-reduced-motion: reduce) {
-          .animate-marquee-left,
-          .animate-marquee-left2 {
-            animation: none;
+        <style>{`
+          @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
           }
-        }
-      `}</style>
+          .animate-marquee {
+            animation: marquee 22s linear infinite;
+          }
+          @media (prefers-reduced-motion: reduce) {
+            .animate-marquee {
+              animation: none;
+            }
+          }
+        `}</style>
+      </div>
     </div>
   );
 }

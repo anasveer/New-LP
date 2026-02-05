@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { Plus, Minus } from "lucide-react";
 import { cn } from "../../lib/utils";
 
@@ -28,8 +28,6 @@ export function FaqAccordion({
   allowMultiple = false,
   className,
 }: FaqAccordionProps) {
-  const reduce = useReducedMotion();
-
   const [open, setOpen] = React.useState<string[]>(
     defaultOpenId ? [defaultOpenId] : items[0] ? [items[0].id] : []
   );
@@ -46,18 +44,11 @@ export function FaqAccordion({
     });
   };
 
-  const fadeUp = (delay = 0) => ({
-    initial: { opacity: 0, y: reduce ? 0 : 14 },
-    whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true, amount: 0.35 },
-    transition: { duration: 0.6, delay, ease: [0.16, 1, 0.3, 1] as any },
-  });
-
   return (
     <section id="faq" className={cn("w-full py-15", className)}>
       <div className="mx-auto w-full max-w-4xl px-4 sm:px-6 lg:px-10">
-        {/* Heading */}
-        <motion.div {...fadeUp(0)} className="text-center">
+        {/* Heading (no entrance animation) */}
+        <div className="text-center">
           <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-neutral-900">
             {title}
           </h2>
@@ -66,10 +57,10 @@ export function FaqAccordion({
               {subtitle}
             </p>
           )}
-        </motion.div>
+        </div>
 
-        {/* List */}
-        <motion.div {...fadeUp(0.08)} className="mt-8 space-y-3">
+        {/* List (no entrance animation) */}
+        <div className="mt-8 space-y-3">
           {items.map((it, idx) => {
             const opened = isOpen(it.id);
 
@@ -118,7 +109,7 @@ export function FaqAccordion({
                       </span>
                     </div>
 
-                    {/* Icon */}
+                    {/* Icon rotate animation is fine (no slide-in) */}
                     <motion.span
                       animate={{ rotate: opened ? 180 : 0 }}
                       transition={{ type: "spring", stiffness: 260, damping: 22 }}
@@ -136,7 +127,7 @@ export function FaqAccordion({
                     </motion.span>
                   </button>
 
-                  {/* Answer */}
+                  {/* Answer (accordion animation kept) */}
                   <AnimatePresence initial={false}>
                     {opened && (
                       <motion.div
@@ -146,16 +137,16 @@ export function FaqAccordion({
                           height: "auto",
                           opacity: 1,
                           transition: {
-                            height: { duration: reduce ? 0 : 0.35 },
-                            opacity: { duration: reduce ? 0 : 0.25, delay: 0.05 },
+                            height: { duration: 0.35 },
+                            opacity: { duration: 0.25, delay: 0.05 },
                           },
                         }}
                         exit={{
                           height: 0,
                           opacity: 0,
                           transition: {
-                            height: { duration: reduce ? 0 : 0.25 },
-                            opacity: { duration: reduce ? 0 : 0.15 },
+                            height: { duration: 0.25 },
+                            opacity: { duration: 0.15 },
                           },
                         }}
                         className="px-4 sm:px-6"
@@ -170,7 +161,7 @@ export function FaqAccordion({
               </div>
             );
           })}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

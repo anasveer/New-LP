@@ -1,7 +1,5 @@
 "use client";
 
-
-import { motion, useReducedMotion } from "framer-motion";
 import { ArrowUpRight, CheckCircle2 } from "lucide-react";
 import { cn } from "../../lib/utils";
 
@@ -34,32 +32,13 @@ export function TradingCta({
   className,
   imageSrc = tradingImg, // ✅ default uses imported asset (works on Vercel)
 }: TradingCtaProps) {
-  const reduce = useReducedMotion();
-
-  const fadeUp = (delay = 0) => ({
-    initial: { opacity: 0, y: reduce ? 0 : 14 },
-    whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true, amount: 0.35 },
-    transition: { duration: 0.6, delay, ease: [0.16, 1, 0.3, 1] as any },
-  });
-
-  const fadeUpFast = (delay = 0) => ({
-    initial: { opacity: 0, y: reduce ? 0 : 10 },
-    whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true, amount: 0.35 },
-    transition: { duration: 0.45, delay, ease: [0.16, 1, 0.3, 1] as any },
-  });
-
   return (
     <section className={cn("w-full", className)}>
       <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-10">
         <div className="grid items-center gap-10 lg:gap-12 grid-cols-1 lg:grid-cols-2">
-          {/* LEFT: IMAGE */}
-          <motion.div
-            {...fadeUp(0)}
-            className="relative flex justify-center lg:justify-start"
-          >
-            <motion.img
+          {/* LEFT: IMAGE (no animation) */}
+          <div className="relative flex justify-center lg:justify-start">
+            <img
               src={imageSrc}
               alt={imageAlt}
               draggable={false}
@@ -68,24 +47,12 @@ export function TradingCta({
                 "h-auto object-contain select-none",
                 "drop-shadow-[0_18px_45px_rgba(0,0,0,0.22)]"
               )}
-              whileHover={
-                reduce
-                  ? {}
-                  : {
-                      rotateZ: 0.6,
-                      y: -6,
-                      scale: 1.02,
-                    }
-              }
-              whileTap={reduce ? {} : { scale: 0.99 }}
-              transition={{ type: "spring", stiffness: 220, damping: 18 }}
             />
-          </motion.div>
+          </div>
 
-          {/* RIGHT: CONTENT */}
+          {/* RIGHT: CONTENT (no animation) */}
           <div className="relative">
-            <motion.h2
-              {...fadeUpFast(0.05)}
+            <h2
               className={cn(
                 "text-balance text-2xl sm:text-3xl lg:text-4xl",
                 "font-extrabold tracking-tight text-neutral-900"
@@ -93,33 +60,23 @@ export function TradingCta({
               style={{ whiteSpace: "pre-line" }}
             >
               {title}
-            </motion.h2>
+            </h2>
 
-            <motion.p
-              {...fadeUpFast(0.12)}
-              className="mt-4 text-base sm:text-lg text-neutral-600 max-w-xl"
-            >
+            <p className="mt-4 text-base sm:text-lg text-neutral-600 max-w-xl">
               {subtitle}
-            </motion.p>
+            </p>
 
             <div className="mt-6 space-y-3">
               {bullets.map((b, idx) => (
-                <motion.div
-                  key={idx}
-                  {...fadeUpFast(0.18 + idx * 0.06)}
-                  className="flex gap-3 text-neutral-700"
-                >
+                <div key={idx} className="flex gap-3 text-neutral-700">
                   <CheckCircle2 className="mt-0.5 h-5 w-5 flex-none text-emerald-500" />
                   <p className="leading-relaxed">{b}</p>
-                </motion.div>
+                </div>
               ))}
             </div>
 
             {/* CTA */}
-            <motion.div
-              {...fadeUpFast(0.45)}
-              className="mt-8 flex flex-col sm:flex-row gap-3"
-            >
+            <div className="mt-8 flex flex-col sm:flex-row gap-3">
               <a
                 href={buttonHref}
                 className={cn(
@@ -142,12 +99,9 @@ export function TradingCta({
                   <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                 </span>
               </a>
-            </motion.div>
+            </div>
 
-            <motion.div
-              {...fadeUpFast(0.6)}
-              className="mt-8 h-px w-full max-w-xl bg-gradient-to-r from-neutral-900/10 via-neutral-900/0 to-neutral-900/10"
-            />
+            <div className="mt-8 h-px w-full max-w-xl bg-gradient-to-r from-neutral-900/10 via-neutral-900/0 to-neutral-900/10" />
           </div>
         </div>
       </div>

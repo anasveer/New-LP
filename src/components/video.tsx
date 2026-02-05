@@ -2,41 +2,48 @@ import { useEffect, useMemo, useState } from "react";
 
 type VideoItem = {
   text: string;
-  videoSrc: string; // mp4/webm url or local path e.g. "/assets/videos/v1.mp4"
-  poster?: string;  // optional image poster (jpg/png/webp). If not provided, we auto-generate from video.
+  videoSrc: string; // ✅ MUST be public URL in Vite build: "/assets/videos/..."
+  poster?: string;  // optional image poster (jpg/png/webp)
 };
 
+/**
+ * ✅ VITE FIX:
+ * Put your mp4 files inside:
+ *   /public/assets/videos/v1.mp4
+ *   /public/assets/videos/v3.mp4
+ *   ...
+ * Then reference them like: "/assets/videos/v1.mp4"
+ *
+ * ❌ NEVER use "/src/assets/..." in production URLs.
+ */
 const videos: VideoItem[] = [
   {
     text:
       "Stock trading has helped me build wealth over time. Investing in fundamentally strong companies and holding for the long term has been my best decision.",
-    videoSrc: "/src/assets/v1.mp4",
+    videoSrc: "/assets/videos/v1.mp4",
     // poster: "/assets/videos/v1.webp",
   },
   {
     text: "The signals are structured and easy to apply. I don’t overthink trades anymore.",
-    videoSrc: "https://thesignalsbank.com/wp-content/uploads/UGC-6.mp4",
-    // poster: "/assets/videos/v2.webp",
+    // ✅ Best: download this file and host it locally too (hotlink can fail on deploy)
+    videoSrc: "/assets/videos/ugc-6.mp4",
+    // poster: "/assets/videos/ugc-6.webp",
   },
   {
     text: "Whenever I had a question, I got an answer quickly. That really improved my progress.",
     videoSrc: "/assets/videos/v3.mp4",
-    // poster: "/assets/videos/v3.webp",
   },
   {
     text: "It feels like having experts with you. Practical guidance and strong community vibes.",
     videoSrc: "/assets/videos/v4.mp4",
-    // poster: "/assets/videos/v4.webp",
   },
   {
     text: "Signals + analysis helped me improve entries and exits. More clarity and less stress.",
     videoSrc: "/assets/videos/v5.mp4",
-    // poster: "/assets/videos/v5.webp",
   },
   {
     text: "Clean signals, good explanations, and a community that motivates you to stay consistent.",
     videoSrc: "/assets/videos/v6.mp4",
-    // poster: "/assets/videos/v6.webp",
   },
 ];
 
@@ -77,7 +84,12 @@ function VideoRow({ item, reverse }: { item: VideoItem; reverse: boolean }) {
           Verified Member
         </div>
 
-        <p className="mt-3 text-sm leading-relaxed text-slate-600 sm:text-base">{item.text}</p>
+        <p className="mt-3 text-sm leading-relaxed text-slate-600 sm:text-base">
+          {item.text}
+        </p>
+
+        {/* ✅ Optional: show source path for debugging (remove later) */}
+        {/* <p className="mt-2 text-xs text-slate-400">Source: {item.videoSrc}</p> */}
       </div>
 
       {/* Video */}
@@ -87,18 +99,18 @@ function VideoRow({ item, reverse }: { item: VideoItem; reverse: boolean }) {
             src={item.videoSrc}
             poster={item.poster}
             className="
-  w-full
-  max-w-[520px]
-  sm:max-w-[560px]
-  mx-auto
-  max-h-[320px]
-  sm:max-h-[360px]
-  lg:max-h-[380px]
-  rounded-2xl
-  object-cover
-  opacity-95
-"
-
+              w-full
+              max-w-[520px]
+              sm:max-w-[560px]
+              mx-auto
+              max-h-[320px]
+              sm:max-h-[360px]
+              lg:max-h-[380px]
+              rounded-2xl
+              object-cover
+              opacity-95
+              bg-black/5
+            "
           />
 
           {/* Play overlay hint */}
@@ -124,8 +136,8 @@ function VideoRow({ item, reverse }: { item: VideoItem; reverse: boolean }) {
 
 /**
  * If `poster` is provided (image), we use it.
- * If not, we auto-generate a poster from the video (near-first frame) using canvas.
- * NOTE: External videos may fail due to CORS; then poster stays empty (browser default).
+ * If not, we TRY to auto-generate a poster from the video (near-first frame) using canvas.
+ * NOTE: External videos may fail due to CORS; for deployed reliability, host mp4 locally in /public.
  */
 function VideoWithAutoPoster({
   src,
@@ -145,9 +157,13 @@ function VideoWithAutoPoster({
 
     if (poster) return;
 
+    // ✅ Only attempt auto-poster for SAME-ORIGIN videos (public hosted)
+    // External mp4 often breaks canvas due to CORS.
+    const isExternal = /^https?:\/\//i.test(src);
+    if (isExternal) return;
+
     const v = document.createElement("video");
     v.src = src;
-    v.crossOrigin = "anonymous";
     v.muted = true;
     v.playsInline = true;
     v.preload = "metadata";
@@ -162,7 +178,7 @@ function VideoWithAutoPoster({
     const capture = () => {
       if (cancelled) return;
 
-      // some videos are black at 0.0 — pick a tiny time offset
+      // some videos are black at 0.0 — pick a tiny offset
       const targetTime = 0.1;
 
       const onSeeked = () => {
@@ -181,7 +197,7 @@ function VideoWithAutoPoster({
           const dataUrl = canvas.toDataURL("image/png");
           if (!cancelled) setAutoPoster(dataUrl);
         } catch {
-          // CORS blocked or canvas export blocked — ignore
+          // ignore
         } finally {
           cleanup();
         }
@@ -192,7 +208,6 @@ function VideoWithAutoPoster({
       try {
         v.currentTime = targetTime;
       } catch {
-        // fallback: try draw without seek
         onSeeked();
       }
     };
@@ -227,7 +242,7 @@ function VideoWithAutoPoster({
       controls
       preload="metadata"
       playsInline
-      poster={effectivePoster}
+      poster={effectivePoster || undefined}
     >
       <source src={src} type={type} />
     </video>

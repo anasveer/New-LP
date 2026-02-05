@@ -157,23 +157,21 @@ export default function Navbar() {
             onClick={() => setOpen(false)}
           />
 
-          <div className="absolute right-0 top-0 h-full w-[86%] max-w-sm bg-white shadow-2xl">
+          <div className="absolute right-0 top-0 h-full w-[86%] max-w-sm bg-gradient-to-r from-[#0F172A]/80 via-[#1E3A8A]/80 to-[#4C1D95]/80 backdrop-blur-xl shadow-2xl">
             <div className="flex items-center justify-between border-b px-4 py-4">
               <div className="flex items-center gap-3">
                 <img
-                  src="/src/assets/logo.png"
-                  alt="The Signals Bank"
-                  width={62}
-                  height={32}
-                  className="h-8 w-8  "
-                />
-                <p className="text-sm font-semibold text-slate-900">The Signals Bank</p>
+    src={logo}
+    alt="The Signals Bank"
+    className="h-10 w-50"
+  />
+                
               </div>
 
               <button
                 type="button"
                 onClick={() => setOpen(false)}
-                className="rounded-full p-2 text-slate-700 hover:bg-slate-100"
+                className="rounded-full p-2 text-white hover:bg-slate-700"
                 aria-label="Close menu"
               >
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
